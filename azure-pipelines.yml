@@ -31,7 +31,7 @@ steps:
 
 - script: |
     echo "📦 Aplicando migraciones..."
-    dotnet ef database update --project pipelines-dotnet-core.csproj --startup-project pipelines-dotnet-core.csproj
+    dotnet ef database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj
   displayName: 'EF Core Update'
 
 - script: |
