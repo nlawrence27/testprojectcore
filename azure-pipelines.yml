@@ -1,12 +1,5 @@
 trigger: none #Evita que se dispare por cambios en git
 
-schedules:
-  - cron: "*/5 * * * *" #Cada 5 minutos como prueba.
-    displayName: Ejecutar cada 5 min
-    branches:
-      include:
-        - main
-    always: true
 
 pool:
   name: LocalPool
