@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  name: LocalPool
+  demands: []
+
+variables:
+  DB_HOST: 'localhost'
+  DB_NAME: 'proof'
+  DB_USER: 'postgres'
+  DB_PASS: '$(Arond1ght$)' # Usa variable secreta en producción
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x' # Asegúrate de usar la versión que tienes instalada
+
+- script: |
+    echo "🔄 Restaurando dependencias..."
+    dotnet restore
+  displayName: 'Restore'
+
+- script: |
+    echo "🔧 Compilando proyecto..."
+    dotnet build --configuration Debug
+  displayName: 'Build'
+
+- script: |
+    echo "📦 Aplicando migraciones..."
+    dotnet ef database update --project TestProjectCore --startup-project TestProjectCore
+  displayName: 'EF Core Update'
+
+- script: |
+    echo "🚀 Publicando aplicación..."
+    dotnet publish -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish'
