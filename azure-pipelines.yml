@@ -13,6 +13,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: self
+  persistCredentials: true
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
@@ -38,26 +41,13 @@ steps:
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
-- checkout: self
-  persistCredentials: true
-
 - script: |
-    echo "📤 Preparando push de cambios..."
-    git fetch origin
-    git branch main origin/main
-    git checkout main
-    git config user.email "bymynimonya@gmail.com"
-    git config user.name "MAONLY2410"
+    git config --global user.mail"bymynynimonya@gmail.com"
+    git config --global user.name "MAONLY2410"
 
-    REM Verifica si hay cambios
-    git status --porcelain > changes.txt
-    for /f %%i in (changes.txt) do (
-      git add .
-      git commit -m "Auto-push desde pipeline, funque"
-      git push origin main
-      goto end
-    )
-    echo ✅ No hay cambios para hacer push.
-    :end
-  displayName: 'Git Push'
-  condition: succeeded()
+    echo "Actualización automática $(date)" >> changes.log
+    git add changes.log
+
+    git commit -m "Automatizado, toy joya [skip ci]" 
+    git push origin HEAD:main
+  displayName: "Hacer cambios y pushear"
