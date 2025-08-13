@@ -39,12 +39,11 @@ steps:
   displayName: 'Publish'
 
 - script: |
-    echo "La pipeline se ejecutó e : $(Build.QueuedTime)"
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-    echo "Actualización automática" > changes.log
+    echo "Actualización automática: $(Build.QueuedTime)" > changes.log
     git add changes.log
 
-    git commit -m "Automatizado, toy joya [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(Build.QueuedTime) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
