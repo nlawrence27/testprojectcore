@@ -9,4 +9,5 @@ public class Customer
     public string last_name { get; set; }
     public int phone { get; set; }
     public string address { get; set; }
+    public string email { get; set; }
 }
