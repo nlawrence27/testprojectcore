@@ -13,6 +13,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: self
+  persistCredentials: true
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
@@ -37,3 +40,20 @@ steps:
     echo "🚀 Publicando aplicación..."
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
+
+- script: |
+    echo "📤 Preparando push de cambios..."
+    git fetch origin
+    git branch main origin/main
+    git checkout main
+    git config user.email "bymynimonya@gmail.com"
+    git config user.name "MAONLY2410"
+
+    if git status --porcelain | grep .; then
+      git add .
+      git commit -m "Auto-push desde pipeline"
+      git push origin main
+    else
+      echo "✅ No hay cambios para hacer push."
+    fi
+  displayName: 'Git Push'
