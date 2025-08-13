@@ -5,7 +5,7 @@
 namespace TestProjectCore.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialcustomerDbCode : Migration
+    public partial class InitialCustomerDbCode : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
