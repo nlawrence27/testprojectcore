@@ -37,27 +37,3 @@ steps:
     echo "🚀 Publicando aplicación..."
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
-
-- checkout: self
-  persistCredentials: true
-
-- script: |
-    echo "📤 Preparando push de cambios..."
-    git fetch origin
-    git branch main origin/main
-    git checkout main
-    git config user.email "bymynimonya@gmail.com"
-    git config user.name "MAONLY2410"
-
-    REM Verifica si hay cambios
-    git status --porcelain > changes.txt
-    for /f %%i in (changes.txt) do (
-      git add .
-      git commit -m "Auto-push desde pipeline, funque"
-      git push origin main
-      goto end
-    )
-    echo ✅ No hay cambios para hacer push.
-    :end
-  displayName: 'Git Push'
-  condition: succeeded()
