@@ -38,6 +38,9 @@ steps:
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
+- checkout: self
+  persistCredentials: true
+
 - script: |
     echo "📤 Realizando push de cambios..."
     git config user.email "bymynimonya@gmail.com"
