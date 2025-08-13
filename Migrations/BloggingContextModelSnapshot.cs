@@ -32,10 +32,6 @@ namespace TestProjectCore.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("code")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -53,7 +49,7 @@ namespace TestProjectCore.Migrations
 
                     b.HasKey("customer_id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 #pragma warning restore 612, 618
         }
