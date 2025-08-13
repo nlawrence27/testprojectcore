@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250811171833_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250813162042_InitialCustomerDb")]
+    partial class InitialCustomerDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace TestProjectCore.Migrations
                     b.Property<string>("last_name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("phone")
+                        .HasColumnType("integer");
 
                     b.HasKey("customer_id");
 
