@@ -42,7 +42,7 @@ steps:
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
 
-    FECHA_HORA= ¿$(date "+%Y-%m-%d %H:%M:%S:")
+    FECHA_HORA= [$(date '+%Y-%m-%d %H:%M:%S:')]
 
     echo "Actualización automática - $FECHA_HORA"> changes.log
     git add changes.log
