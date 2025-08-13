@@ -42,12 +42,17 @@ steps:
   persistCredentials: true
 
 - script: |
-    echo "📤 Realizando push de cambios..."
+    echo "📤 Preparando push de cambios..."
+    git fetch origin
+    git branch main origin/main
+    git checkout main
     git config user.email "bymynimonya@gmail.com"
     git config user.name "MAONLY2410"
-    git checkout main
+    if git status --porcelain | grep .; then
     git add .
     git commit -m "Auto-push desde pipeline, funque"
     git push origin main
+    else
+      echo "No hay cambios para hacer push"
   displayName: 'Git Push'
   condition: succeeded()
