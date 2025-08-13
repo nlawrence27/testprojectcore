@@ -1,1 +1,1 @@
-"Actualización automática" 
+"Actualización automática: $(Build.QueuedTime)" 
