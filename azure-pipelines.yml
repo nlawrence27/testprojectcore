@@ -42,6 +42,7 @@ steps:
     echo "📤 Realizando push de cambios..."
     git config user.email "bymynimonya@gmail.com"
     git config user.name "MAONLY2410"
+    git checkout main
     git add .
     git commit -m "Auto-push desde pipeline, funque"
     git push origin main
