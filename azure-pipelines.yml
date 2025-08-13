@@ -1,0 +1,63 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '**/Migrations/**'
+
+pool:
+  name: LocalPool
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x'
+
+- script: |
+    echo "🔄 Restaurando dependencias..."
+    dotnet restore
+  displayName: 'Restore'
+
+- script: |
+    echo "🔧 Compilando proyecto..."
+    dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build'
+
+- script: |
+    echo "📦 Aplicando migraciones..."
+    dotnet ef database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj
+  displayName: 'EF Core Update'
+
+- script: |
+    echo "🚀 Publicando aplicación..."
+    dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish'
+
+- checkout: self
+  persistCredentials: true
+
+- script: |
+    echo "📤 Preparando push de cambios..."
+    git fetch origin
+    git branch main origin/main
+    git checkout main
+    git config user.email "bymynimonya@gmail.com"
+    git config user.name "MAONLY2410"
+
+    REM Verifica si hay cambios
+    git status --porcelain > changes.txt
+    for /f %%i in (changes.txt) do (
+      git add .
+      git commit -m "Auto-push desde pipeline, funque"
+      git push origin main
+      goto end
+    )
+    echo ✅ No hay cambios para hacer push.
+    :end
+  displayName: 'Git Push'
+  condition: succeeded()
