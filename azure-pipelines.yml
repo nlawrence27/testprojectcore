@@ -2,6 +2,9 @@ trigger:
   branches:
     include:
       - main
+  paths:
+    include:
+    - Migrations/*
 
 pool:
   name: LocalPool
@@ -41,12 +44,9 @@ steps:
 - script: |
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-
-    FECHA_HORA= [$(date '+%Y-%m-%d %H:%M:%S:')]
-
-    echo "Actualización automática - $FECHA_HORA"> changes.log
+    echo "Actualización automática: $(Build.QueuedTime)" > changes.log
     git add changes.log
 
-    git commit -m "Automatizado, toy joya [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(Build.QueuedTime) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
