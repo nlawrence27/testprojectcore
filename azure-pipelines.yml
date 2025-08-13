@@ -1,21 +1,22 @@
-trigger: none #Evita que se dispare por cambios en git
-
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - '**/Migrations/**'
 
 pool:
   name: LocalPool
-  demands: []
 
 variables:
-  DB_HOST: 'localhost'
-  DB_NAME: 'proof'
-  DB_USER: 'postgres'
-  DB_PASS: '$(Arond1ght$)' # Usa variable secreta en producción
+  buildConfiguration: 'Release'
 
 steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '9.0.x' # Asegúrate de usar la versión que tienes instalada
+    version: '9.0.x'
 
 - script: |
     echo "🔄 Restaurando dependencias..."
@@ -24,7 +25,7 @@ steps:
 
 - script: |
     echo "🔧 Compilando proyecto..."
-    dotnet build --configuration Debug
+    dotnet build --configuration $(buildConfiguration)
   displayName: 'Build'
 
 - script: |
@@ -34,5 +35,15 @@ steps:
 
 - script: |
     echo "🚀 Publicando aplicación..."
-    dotnet publish -c Release -o $(Build.ArtifactStagingDirectory)
+    dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
+
+- script: |
+    echo "📤 Realizando push de cambios..."
+    git config user.email "bymynimonya@gmail.com"
+    git config user.name "MAONLY2410"
+    git add .
+    git commit -m "Auto-push desde pipeline, funque"
+    git push origin main
+  displayName: 'Git Push'
+  condition: succeeded()
