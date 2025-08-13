@@ -10,4 +10,5 @@ public class Customer
     public int phone { get; set; }
     public string address { get; set; }
     public string email { get; set; }
+    public string code { get; set; }
 }
