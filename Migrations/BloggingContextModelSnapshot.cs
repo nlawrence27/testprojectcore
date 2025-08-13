@@ -28,18 +28,6 @@ namespace TestProjectCore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("customer_id"));
 
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("code")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("first_name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -47,9 +35,6 @@ namespace TestProjectCore.Migrations
                     b.Property<string>("last_name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("phone")
-                        .HasColumnType("integer");
 
                     b.HasKey("customer_id");
 

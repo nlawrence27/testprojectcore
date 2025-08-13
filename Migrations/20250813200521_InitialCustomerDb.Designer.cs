@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250813162042_InitialCustomerDb")]
+    [Migration("20250813200521_InitialCustomerDb")]
     partial class InitialCustomerDb
     {
         /// <inheritdoc />
@@ -38,9 +38,6 @@ namespace TestProjectCore.Migrations
                     b.Property<string>("last_name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("phone")
-                        .HasColumnType("integer");
 
                     b.HasKey("customer_id");
 
