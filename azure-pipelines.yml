@@ -46,12 +46,9 @@ steps:
     git config --global user.name "MAONLY2410"
     echo "Actualización automática: $(Build.QueuedTime)" > changes.log
     git add changes.log
-
+    echo "Último commit"
+    git log -1 --pretty=format:"Autor: %an <%ae> - Mensaje: %s" > changes.log
+    git add changes.log
     git commit -m "Automatizado, toy joya - $(Build.QueuedTime) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
-
-- script: |
-    echo "Último commit"
-    git log -1 --pretty=format:"Autor: %an <%ae> - Mensaje: %s"
-  displayName: 'Mostrar autor del último commit'
