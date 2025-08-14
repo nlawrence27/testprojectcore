@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250814142500_InitialCustomerDbActive")]
+    [Migration("20250814143203_InitialCustomerDbActive")]
     partial class InitialCustomerDbActive
     {
         /// <inheritdoc />
