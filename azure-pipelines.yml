@@ -50,3 +50,8 @@ steps:
     git commit -m "Automatizado, toy joya - $(Build.QueuedTime) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
+
+- script: |
+    echo "Último commit"
+    git log -1 --pretty=format:"Autor: %an <%ae> - Mensaje: %s"
+  displayName: 'Mostrar autor del último commit'
