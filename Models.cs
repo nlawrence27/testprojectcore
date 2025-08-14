@@ -11,4 +11,5 @@ public class Customer
     public string address { get; set; }
     public string email { get; set; }
     public int code { get; set; }
+    public bool active { get; set; }
 }
