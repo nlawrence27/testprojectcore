@@ -11,7 +11,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  currentDate: $[format('{0:yyyy}.{0:MM}.{0:dd}', pipeline.startTime)]
+  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
+
 
 steps:
 - checkout: self
@@ -45,9 +46,9 @@ steps:
 - script: |
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-    echo "Actualización automática: $(currentDate)" > changes.log
+    echo "Actualización automática: $(fullTimeStamp)"> changes.log
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(currentDate) [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(fullTimeStamp) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
