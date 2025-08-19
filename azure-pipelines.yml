@@ -13,7 +13,6 @@ variables:
   buildConfiguration: 'Release'
   fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
 
-
 steps:
 - checkout: self
   persistCredentials: true
@@ -24,31 +23,31 @@ steps:
     version: '9.0.x'
 
 - script: |
-    echo "🔄 Restaurando dependencias..."
+    echo "Restaurando dependencias."
     dotnet restore
   displayName: 'Restore'
 
 - script: |
-    echo "🔧 Compilando proyecto..."
+    echo "Compilando proyecto."
     dotnet build --configuration $(buildConfiguration)
   displayName: 'Build'
 
 - script: |
-    echo "📦 Aplicando migraciones..."
+    echo "Aplicando migraciones."
     dotnet ef database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj
   displayName: 'EF Core Update'
 
 - script: |
-    echo "🚀 Publicando aplicación..."
+    echo "Publicando aplicación."
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
 - script: |
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-    echo "Actualización automática: $(fullTimeStamp)"> changes.log
+    echo "Actualización automática: $(fullTimestamp)"> changes.log
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(fullTimeStamp) [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
