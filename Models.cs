@@ -23,4 +23,5 @@ public class Order
     [Key]
     public int order_id { get; set; }
     public string notes { get; set; }
+    public Guid credit_card { get; set; }
 }
