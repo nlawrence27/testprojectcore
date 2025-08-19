@@ -11,16 +11,11 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
 
 steps:
 - checkout: self
   persistCredentials: true
-- powershell: |
-    $utcNow = Get-Date-AsUTC
-    $utcMinus6 = $utcNow.AddHours(-6)
-    $formatted = $utcMinus6.ToString("yyyy-MM-dd HH:mm:ss")
-    Write-Host "##vso[task.setvariable variable=localTimestamp]$formatted"
-  displayName: 'Convert UTC to UTC-6'
 
 - task: UseDotNet@2
   inputs:
@@ -50,9 +45,9 @@ steps:
 - script: |
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-    echo "Actualización automática: $(localTimestamp)"> changes.log
+    echo "Actualización automática: $(fullTimestamp)"> changes.log
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(localTimestamp) [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]" 
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
