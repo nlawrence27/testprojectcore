@@ -13,3 +13,8 @@ public class Customer
     public int code { get; set; }
     public bool active { get; set; }
 }
+public class Movie
+{
+    [Key]
+    public int movie_od { get; set; }
+}
