@@ -24,7 +24,7 @@ steps:
 
 - script: | #Genera la restauración de las dependencias necesarias
     echo "Restaurando dependencias."
-    dotnet restore #comando predefinido
+    dotnet restore
   displayName: 'Restore'
 
 - script: | #Genera la compilación del proyecto a través del comando dotnet
