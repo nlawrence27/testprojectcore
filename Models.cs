@@ -18,3 +18,8 @@ public class Movie
     [Key]
     public int movie_od { get; set; }
 }
+public class Order
+{
+    [Key]
+    public int order_id { get; set; }
+}
