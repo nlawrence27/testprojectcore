@@ -4,50 +4,50 @@ trigger:
       - main
   paths:
     include:
-    - Migrations/*
+    - Migrations/* #Solo incluye el trigger por modificación de la carpeta Migrations en main
 
 pool:
-  name: LocalPool
+  name: LocalPool #Agente local instalado en máquina
 
 variables:
   buildConfiguration: 'Release'
-  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
+  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)] #Formato de salida 20250819-141600
 
 steps:
 - checkout: self
-  persistCredentials: true
+  persistCredentials: true #Permite el acceso a modificar el github
 
-- task: UseDotNet@2
+- task: UseDotNet@2 #Verifica que la versión instalada en sistema sea 9.0 o superior
   inputs:
     packageType: 'sdk'
     version: '9.0.x'
 
-- script: |
+- script: | #Genera la restauración de las dependencias necesarias
     echo "Restaurando dependencias."
-    dotnet restore
+    dotnet restore #comando predefinido
   displayName: 'Restore'
 
-- script: |
+- script: | #Genera la compilación del proyecto a través del comando dotnet
     echo "Compilando proyecto."
     dotnet build --configuration $(buildConfiguration)
   displayName: 'Build'
 
-- script: |
+- script: | #Actualiza la base de datos con las migraciones nuevas para control actualizado
     echo "Aplicando migraciones."
     dotnet ef database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj
   displayName: 'EF Core Update'
 
-- script: |
+- script: | #Publica los anteriores puntos si todo sale bien
     echo "Publicando aplicación."
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
-- script: |
+- script: | #Configuración directa del github desd email hasta los comandos de modificación en el mismo
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
     echo "Actualización automática: $(fullTimestamp)"> changes.log
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]" 
+    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"  #Genera un archivo que muestra la última modificación automatizada del repo.
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
