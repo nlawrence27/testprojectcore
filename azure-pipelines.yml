@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)] #Formato de salida 20250819-141600
+  fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
 
 steps:
 - checkout: self
@@ -48,6 +48,6 @@ steps:
     echo "Actualización automática: $(fullTimestamp)"> changes.log
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"  #Genera un archivo que muestra la última modificación automatizada del repo.
+    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
