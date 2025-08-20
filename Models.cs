@@ -28,5 +28,6 @@ public class Order
 public class OrderDetail
 {
     [Key]
-    public int ordeDetail_id { get; set; }
+    public int orderDetail_id { get; set; }
+    public string type { get; set; }
 }
