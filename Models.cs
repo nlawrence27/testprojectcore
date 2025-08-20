@@ -25,3 +25,8 @@ public class Order
     public string notes { get; set; }
     public Guid credit_card { get; set; }
 }
+public class OrderDetail
+{
+    [Key]
+    public int ordeDetail_id { get; set; }
+}
