@@ -55,7 +55,7 @@ steps:
 
     git add changes.log
     echo "Último commit"
-    git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"
+    git commit -m "Automatizado por último vez en - $(fullTimestamp) [skip ci]"
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
 
