@@ -42,14 +42,20 @@ steps:
     dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish'
 
-- script: | #Configuración directa del github desd email hasta los comandos de modificación en el mismo
-    git config --global user.mail"bymynynimonya@gmail.com"
+- script: |
+    # Configuración directa del GitHub
+    git config --global user.email "bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
-    echo "Actualización automática: $(fullTimestamp)"> changes.log
+
+    echo "Actualización automática: $(fullTimestamp)" > changes.log
+
+    # Mostrar archivos modificados
     echo "Archivos modificados:" >> changes.log
-    git diff --name-only HEAD~1 HEAD >> changes.log
+    git diff --name-only >> changes.log
+
     git add changes.log
     echo "Último commit"
     git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"
     git push origin HEAD:main
   displayName: "Hacer cambios y pushear"
+
