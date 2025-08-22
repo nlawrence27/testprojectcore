@@ -36,4 +36,5 @@ public class Warehouse
     [Key]
     public int warehouse_id { get; set; }
     public string name { get; set; }
+    public string location { get; set; }
 }
