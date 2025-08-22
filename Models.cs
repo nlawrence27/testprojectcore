@@ -30,6 +30,7 @@ public class OrderDetail
     [Key]
     public int orderDetail_id { get; set; }
     public string type { get; set; }
+    public int quantity { get; set; }
 }
 public class Warehouse
 {
