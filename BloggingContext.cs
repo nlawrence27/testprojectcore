@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 public class BloggingContext : DbContext
 {
@@ -9,6 +11,12 @@ public class BloggingContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=proof;Username=postgres;Password=Arond1ght$;");
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+
+        var configuration = builder.Build();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        optionsBuilder.UseNpgsql(connectionString);
     }
 }
