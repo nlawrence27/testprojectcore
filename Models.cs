@@ -37,4 +37,5 @@ public class Warehouse
     public int warehouse_id { get; set; }
     public string name { get; set; }
     public string location { get; set; }
+    public string phone { get; set; }
 }
