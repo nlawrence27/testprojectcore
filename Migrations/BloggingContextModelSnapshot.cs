@@ -108,19 +108,6 @@ namespace TestProjectCore.Migrations
 
                     b.ToTable("OrderDetails");
                 });
-
-            modelBuilder.Entity("Warehouse", b =>
-                {
-                    b.Property<int>("warehouse_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("warehouse_id"));
-
-                    b.HasKey("warehouse_id");
-
-                    b.ToTable("Warehouses");
-                });
 #pragma warning restore 612, 618
         }
     }

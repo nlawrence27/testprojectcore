@@ -11,6 +11,13 @@ namespace TestProjectCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Warehouses");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.CreateTable(
                 name: "Warehouses",
                 columns: table => new
@@ -22,13 +29,6 @@ namespace TestProjectCore.Migrations
                 {
                     table.PrimaryKey("PK_Warehouses", x => x.warehouse_id);
                 });
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Warehouses");
         }
     }
 }

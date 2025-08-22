@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250822145052_InitialCustomerDbAddWarehouse")]
+    [Migration("20250822152219_InitialCustomerDbAddWarehouse")]
     partial class InitialCustomerDbAddWarehouse
     {
         /// <inheritdoc />
@@ -110,19 +110,6 @@ namespace TestProjectCore.Migrations
                     b.HasKey("orderDetail_id");
 
                     b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("Warehouse", b =>
-                {
-                    b.Property<int>("warehouse_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("warehouse_id"));
-
-                    b.HasKey("warehouse_id");
-
-                    b.ToTable("Warehouses");
                 });
 #pragma warning restore 612, 618
         }
