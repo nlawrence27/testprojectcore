@@ -53,7 +53,7 @@ steps:
     echo "Archivos modificados:" >> changes.log
     git diff --name-only >> changes.log
 
-    #Mostrar archivos agregados nuevos:
+    #Mostrar archivos nuevos agregados:
     echo "" >> changes.log
     echo "Archivos nuevos agregados:" >> changes.log
     git ls-files --others --exclude-standard >> changes.log
