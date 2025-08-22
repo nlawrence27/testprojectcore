@@ -53,6 +53,11 @@ steps:
     echo "Archivos modificados:" >> changes.log
     git diff --name-only >> changes.log
 
+    #Mostrar archivos agregados nuevos:
+    echo "" >> changes.log
+    echo "Archivos nuevos agregados:" >> changes.log
+    git ls-files --others --exclude-standard >> changes.log
+
     git add changes.log
     echo "Último commit"
     git commit -m "Automatizado por último vez en - $(fullTimestamp) [skip ci]"
