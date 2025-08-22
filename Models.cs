@@ -16,7 +16,8 @@ public class Customer
 public class Movie
 {
     [Key]
-    public int movie_od { get; set; }
+    public int movie_id { get; set; }
+    public string title { get; set; }
 }
 public class Order
 {
