@@ -31,7 +31,7 @@ public class OrderDetail
     public int orderDetail_id { get; set; }
     public string type { get; set; }
 }
-public class warehouse
+public class Warehouse
 {
     [Key]
     public int warehouse_id { get; set; }
