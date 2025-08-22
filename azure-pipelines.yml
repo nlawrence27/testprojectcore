@@ -46,6 +46,8 @@ steps:
     git config --global user.mail"bymynynimonya@gmail.com"
     git config --global user.name "MAONLY2410"
     echo "Actualización automática: $(fullTimestamp)"> changes.log
+    echo "Archivos modificados:" >> changes.log
+    git diff --name-only HEAD~1 HEAD >> changes.log
     git add changes.log
     echo "Último commit"
     git commit -m "Automatizado, toy joya - $(fullTimestamp) [skip ci]"
