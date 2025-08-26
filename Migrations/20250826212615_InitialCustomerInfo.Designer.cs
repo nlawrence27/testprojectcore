@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250826161837_InitialCustomerDbMovieDescrip")]
-    partial class InitialCustomerDbMovieDescrip
+    [Migration("20250826212615_InitialCustomerInfo")]
+    partial class InitialCustomerInfo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,10 +69,6 @@ namespace TestProjectCore.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("movie_id"));
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("title")
                         .IsRequired()

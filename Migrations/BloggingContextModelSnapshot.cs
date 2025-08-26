@@ -67,10 +67,6 @@ namespace TestProjectCore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("movie_id"));
 
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("text");
