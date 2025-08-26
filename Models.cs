@@ -18,6 +18,7 @@ public class Movie
     [Key]
     public int movie_id { get; set; }
     public string title { get; set; }
+    public string description { get; set; }
 }
 public class Order
 {
