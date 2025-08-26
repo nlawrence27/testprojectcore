@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250826212615_InitialCustomerInfo")]
+    [Migration("20250826213558_InitialCustomerInfo")]
     partial class InitialCustomerInfo
     {
         /// <inheritdoc />
