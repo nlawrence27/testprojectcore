@@ -4,127 +4,96 @@ trigger:
       - main
   paths:
     include:
-      - Migrations/*
+    - Migrations/* #Solo incluye el trigger por modificación de la carpeta Migrations en main
 
 pool:
-  name: LocalPool
+  name: LocalPool #Agente local instalado en máquina
 
 variables:
   buildConfiguration: 'Release'
   fullTimestamp: $[format('{0:yyyyMMdd}-{0:HHmmss}', pipeline.startTime)]
-  solution: '**/*.sln'
-  projects: '**/*.csproj'
 
-stages:
-- stage: Build
-  jobs:
-  - job: Build_and_Test
-    displayName: 'Compilar y probar'
-    steps:
-    - checkout: self
-      persistCredentials: true
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  steps:
+  - checkout: self
+    persistCredentials: true #Permite el acceso a modificar el github
 
-    - task: UseDotNet@2
-      displayName: 'Instalar .NET 9.0 SDK'
-      inputs:
-        packageType: 'sdk'
-        version: '9.0.x'
+  - task: UseDotNet@2 #Verifica que la versión instalada en sistema sea 9.0 o superior
+    inputs:
+      packageType: 'sdk'
+      version: '9.0.x'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Restaurar dependencias'
-      inputs:
-        command: 'restore'
-        projects: '$(projects)'
-        feedsToUse: 'select'
+  - script: | #Genera la restauración de las dependencias necesarias
+      echo "Restaurando dependencias."
+      dotnet restore
+    displayName: 'Restore'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Compilar proyecto'
-      inputs:
-        command: 'build'
-        projects: '$(projects)'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
+  - script: | #Genera la compilación del proyecto a través del comando dotnet
+      echo "Compilando proyecto."
+      dotnet build --configuration $(buildConfiguration)
+    displayName: 'Build'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Ejecutar pruebas'
-      inputs:
-        command: 'test'
-        projects: '**/*Tests.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
-
-- stage: Deploy
+- job: Database_Update
+  displayName: 'Database Update Job'
   dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - job: Database_Migration
-    displayName: 'Migración de base de datos'
-    steps:
-    - checkout: self
-      persistCredentials: true
+  steps:
+  - checkout: self
+    persistCredentials: true
 
-    - task: UseDotNet@2
-      displayName: 'Instalar .NET 9.0 SDK'
-      inputs:
-        packageType: 'sdk'
-        version: '9.0.x'
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '9.0.x'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Aplicar migraciones EF Core'
-      inputs:
-        command: 'custom'
-        custom: 'ef'
-        arguments: 'database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj'
+  - script: | #Actualiza la base de datos con las migraciones nuevas para control actualizado
+      echo "Aplicando migraciones."
+      dotnet ef database update --project TestProjectCore.csproj --startup-project TestProjectCore.csproj
+    displayName: 'EF Core Update'
 
-  - job: Publish_Application
-    displayName: 'Publicar aplicación'
-    dependsOn: Database_Migration
-    steps:
-    - checkout: self
-      persistCredentials: true
+- job: Publish
+  displayName: 'Publish Job'
+  dependsOn: Database_Update
+  steps:
+  - checkout: self
+    persistCredentials: true
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Publicar aplicación'
-      inputs:
-        command: 'publish'
-        projects: 'TestProjectCore.csproj'
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: true
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '9.0.x'
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publicar artefactos'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+  - script: | #Publica los anteriores puntos si todo sale bien
+      echo "Publicando aplicación."
+      dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
+    displayName: 'Publish'
 
-- stage: Documentation
-  dependsOn: Deploy
-  condition: succeeded()
-  jobs:
-  - job: Update_Changes_Log
-    displayName: 'Actualizar documentación'
-    steps:
-    - checkout: self
-      persistCredentials: true
+- job: Git_Update
+  displayName: 'Git Update Job'
+  dependsOn: Publish
+  steps:
+  - checkout: self
+    persistCredentials: true
 
-    - script: |
-        git config --global user.email "bymynynimonya@gmail.com"
-        git config --global user.name "MAONLY2410"
-        
-        # Crear log de cambios más detallado
-        echo "# Registro de cambios - $(fullTimestamp)" > CHANGES.md
-        echo "## Build completado exitosamente" >> CHANGES.md
-        echo "" >> CHANGES.md
-        echo "### Archivos modificados:" >> CHANGES.md
-        git diff --name-only HEAD^ HEAD | sed 's/^/- /' >> CHANGES.md
-        echo "" >> CHANGES.md
-        echo "### Archivos nuevos:" >> CHANGES.md
-        git ls-files --others --exclude-standard | sed 's/^/- /' >> CHANGES.md
-        echo "" >> CHANGES.md
-        echo "*Actualizado automáticamente por Azure DevOps Pipeline*" >> CHANGES.md
+  - script: |
+      # Configuración directa del GitHub
+      git config --global user.email "bymynynimonya@gmail.com"
+      git config --global user.name "MAONLY2410"
 
-        git add CHANGES.md
-        git commit -m "docs: Actualizar registro de cambios - $(fullTimestamp) [skip ci]"
-        git push origin HEAD:main
-      displayName: 'Actualizar registro de cambios'
-      env:
-        GIT_SSL_NO_VERIFY: false
+      echo "Actualización automática: $(fullTimestamp)" > changes.log
+
+      # Mostrar archivos modificados
+      echo "Archivos modificados:" >> changes.log
+      git diff --name-only >> changes.log
+
+      #Mostrar archivos nuevos agregados:
+      echo "" >> changes.log
+      echo "Archivos nuevos agregados:" >> changes.log
+      git ls-files --others --exclude-standard >> changes.log
+
+      git add changes.log
+      echo "Último commit"
+      git commit -m "Automatizado por último vez en - $(fullTimestamp) [skip ci]"
+      git push origin HEAD:main
+    displayName: "Hacer cambios y pushear"
