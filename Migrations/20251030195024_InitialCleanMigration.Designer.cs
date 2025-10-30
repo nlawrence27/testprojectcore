@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20250827172246_InitialCustomerDbMovieDes")]
-    partial class InitialCustomerDbMovieDes
+    [Migration("20251030195024_InitialCleanMigration")]
+    partial class InitialCleanMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
