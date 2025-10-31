@@ -128,16 +128,16 @@ namespace TestProjectCore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("product_id"));
 
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("price")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("product_description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("stock")
                         .HasColumnType("integer");

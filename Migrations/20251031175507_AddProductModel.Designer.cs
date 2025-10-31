@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestProjectCore.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20251031174532_AddProductNewColumn")]
-    partial class AddProductNewColumn
+    [Migration("20251031175507_AddProductModel")]
+    partial class AddProductModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,16 +131,16 @@ namespace TestProjectCore.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("product_id"));
 
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("price")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("product_description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("stock")
                         .HasColumnType("integer");
