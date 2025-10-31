@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  vmImage: 'windows-latest'
+  name: WindowsServerPool 
 
 variables:
   buildConfiguration: 'Release'
@@ -23,4 +23,4 @@ steps:
   displayName: 'Ejecutar pruebas unitarias'
 
 - script: dotnet ef database update
-  displayName: 'Aplicar migraciones a la base de datos local'
+  displayName: 'Aplicar migraciones'
