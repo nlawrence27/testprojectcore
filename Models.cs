@@ -42,3 +42,11 @@ public class Warehouse
     public string location { get; set; }
     public string phone { get; set; }
 }
+public class Product
+{
+    [Key]
+    public int product_id { get; set; }
+    public string name { get; set; }
+    public decimal price { get; set; }
+    public int stock { get; set; }
+}
