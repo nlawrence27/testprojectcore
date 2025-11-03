@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>BibliotecaProof</id>
+    <version>1.0.1</version>
+    <authors>Nahomi</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="088de89088e2b61a8fd36e847c720ee6490b2b09" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="Microsoft.EntityFrameworkCore" version="9.0.8" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="9.0.8" exclude="Build,Analyzers" />
+        <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="9.0.4" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.runtimeconfig.json" target="lib\net9.0\TestProjectCore.runtimeconfig.json" />
+    <file src="C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.dll" target="lib\net9.0\TestProjectCore.dll" />
+  </files>
+</package>

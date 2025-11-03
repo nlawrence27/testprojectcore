@@ -1,0 +1,15 @@
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.csproj.AssemblyReference.cache
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.AssemblyInfoInputs.cache
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.AssemblyInfo.cs
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.csproj.CoreCompileInputs.cache
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.sourcelink.json
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.deps.json
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.runtimeconfig.json
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.dll
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\bin\Release\net9.0\TestProjectCore.pdb
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.dll
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\refint\TestProjectCore.dll
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.pdb
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\TestProjectCore.genruntimeconfig.cache
+C:\Users\nlawrence\source\nlawrence27\testprojectcore\obj\Release\net9.0\ref\TestProjectCore.dll

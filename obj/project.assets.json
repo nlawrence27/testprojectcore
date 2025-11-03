@@ -3075,23 +3075,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\USUARIO\\.nuget\\packages\\": {},
+    "C:\\Users\\nlawrence\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USUARIO\\OneDrive\\Documentos\\JAPDEVA\\TestProjectCore\\testprojectcore\\TestProjectCore.csproj",
-      "projectName": "TestProjectCore",
-      "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Documentos\\JAPDEVA\\TestProjectCore\\testprojectcore\\TestProjectCore.csproj",
-      "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USUARIO\\OneDrive\\Documentos\\JAPDEVA\\TestProjectCore\\testprojectcore\\obj\\",
+      "projectUniqueName": "C:\\Users\\nlawrence\\source\\nlawrence27\\testprojectcore\\TestProjectCore.csproj",
+      "projectName": "BibliotecaProof",
+      "projectPath": "C:\\Users\\nlawrence\\source\\nlawrence27\\testprojectcore\\TestProjectCore.csproj",
+      "packagesPath": "C:\\Users\\nlawrence\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nlawrence\\source\\nlawrence27\\testprojectcore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nlawrence\\source\\nlawrence27\\testprojectcore\\NuGet.Config",
+        "C:\\Users\\nlawrence\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3099,8 +3100,8 @@
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://pkgs.dev.azure.com/nlawrence0869/test_pro/_packaging/test_feed/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
@@ -3159,7 +3160,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
