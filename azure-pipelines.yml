@@ -1,26 +1,42 @@
 trigger:
   - main
 
-pool:
-  name: WindowsServerPool 
-
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '9.0.x'
+jobs:
+- job: Setup
+  pool:
+    name: WindowsServerPool
+  steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
+      displayName: 'Instalar .NET SDK'
 
-- script: dotnet restore
-  displayName: 'Restaurar paquetes'
+- job: Restore
+  pool:
+    name: WindowsServerPool
+  dependsOn: Setup
+  steps:
+    - script: dotnet restore
+      displayName: 'Restaurar paquetes'
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Compilar proyecto'
+- job: Build
+  pool:
+    name: WindowsServerPool
+  dependsOn: Restore
+  steps:
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'Compilar proyecto'
 
-- script: dotnet test --configuration $(buildConfiguration)
-  displayName: 'Ejecutar pruebas unitarias'
-
-- script: dotnet ef database update
-  displayName: 'Aplicar migraciones'
+- job: TestAndMigrate
+  pool:
+    name: WindowsServerPool
+  dependsOn: Build
+  steps:
+    - script: dotnet test --configuration $(buildConfiguration)
+      displayName: 'Ejecutar pruebas unitarias'
+    - script: dotnet ef database update
+      displayName: 'Aplicar migraciones'
