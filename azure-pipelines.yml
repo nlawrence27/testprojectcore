@@ -31,12 +31,18 @@ jobs:
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Compilar proyecto'
 
-- job: TestAndMigrate
+- job: Test
   pool:
     name: WindowsServerPool
-  dependsOn: Build
+  dependsOn: Restore
   steps:
     - script: dotnet test --configuration $(buildConfiguration)
       displayName: 'Ejecutar pruebas unitarias'
+
+- job: Migrate
+  pool:
+    name: WindowsServerPool
+  dependsOn: Restore
+  steps:
     - script: dotnet ef database update
       displayName: 'Aplicar migraciones'
